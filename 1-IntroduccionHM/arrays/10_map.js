@@ -42,7 +42,7 @@ const list = usuarios
     .filter(u => u.edad > 17)
     .map(u => `<li>${u.nombre}</li>`)
 
-const html = `<ol>${list.join()}</ol>`
+const html = `<ol>${list.join('')}</ol>`
 console.log(html)
 
 
