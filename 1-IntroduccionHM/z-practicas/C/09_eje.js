@@ -85,15 +85,27 @@ const usuarios = [
 ];
 
 function unificar(data_a, data_b) {
-    // let keys = Object.keys(data_a)
-    // data_b.map(e => {
-    //     e.reduce((acc, k) => {
-    //         let key = 
-    //     }, {})
-    // })
-    return data_a.concat(data_b)
+    return data_a.concat(data_b.map(u => ({
+        id: u.id,
+        name : u.nombre,
+        age: u.edad,
+        email: u.email,
+        active: u.activo,
+        plan: u.plan
+    })))
+    .sort((a, b) => {
+        if (a.age > b.age) return 1;
+        if (a.age < b.age) return -1;
+        return 0;
+    })
+    .map(u => 
+        `<li>Nombre: ${u.name}, Edad: ${u.age}</li>`
+    )
 }
 
-console.log(unificar(usuarios, users))
-
-usuarios.ma
+const html = `<ul>
+    ${unificar(users, usuarios).join(`
+    `)}
+</ul>
+`
+console.log(html)
