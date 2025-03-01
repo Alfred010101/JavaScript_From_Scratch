@@ -1,0 +1,112 @@
+Creación y manipulación de objetos
+    *Object.create(proto, propertiesObject)
+        Crea un nuevo objeto con el prototipo especificado.
+
+        const persona = { saludar() { console.log("Hola"); } };
+        const juan = Object.create(persona);
+        juan.saludar(); // "Hola"
+
+    *Object.assign(target, ...sources)
+        Copia propiedades de uno o más objetos a un objeto destino.
+
+        const obj1 = { a: 1 };
+        const obj2 = { b: 2 };
+        const resultado = Object.assign({}, obj1, obj2);
+        console.log(resultado); // { a: 1, b: 2 }
+
+###################################################################
+
+Obtención de claves, valores y descripciones
+    *Object.keys(obj)
+        Devuelve un array con las claves (propiedades) del objeto.
+
+        console.log(Object.keys({ a: 1, b: 2 })); // ["a", "b"]
+    
+    *Object.values(obj)
+        Devuelve un array con los valores de las propiedades del objeto.
+
+        console.log(Object.values({ a: 1, b: 2 })); // [1, 2]
+    
+    *Object.entries(obj)
+        Devuelve un array de pares [clave, valor] del objeto.
+
+        console.log(Object.entries({ a: 1, b: 2 })); // [["a", 1], ["b", 2]]
+    
+    *Object.getOwnPropertyDescriptors(obj)
+        Devuelve un objeto con los descriptores de todas las propiedades (writable, enumerable, configurable).
+
+        console.log(Object.getOwnPropertyDescriptors({ x: 10 }));
+
+###################################################################
+
+Propiedades y prototipos
+    *Object.getPrototypeOf(obj)
+        Obtiene el prototipo (herencia) de un objeto.
+
+        const obj = {};
+        console.log(Object.getPrototypeOf(obj) === Object.prototype); // true
+    
+    *Object.setPrototypeOf(obj, proto)
+        Cambia el prototipo de un objeto.
+
+        const nuevoProto = { mensaje: "Hola" };
+        const obj = {};
+        Object.setPrototypeOf(obj, nuevoProto);
+        console.log(obj.mensaje); // "Hola"
+
+###################################################################
+
+Congelamiento y sellado de objetos
+    *Object.freeze(obj)
+        Congela un objeto, evitando modificaciones.
+
+        const obj = { nombre: "Juan" };
+        Object.freeze(obj);
+        obj.nombre = "Pedro"; // No cambia
+        console.log(obj.nombre); // "Juan"
+
+    *Object.isFrozen(obj)
+        Verifica si un objeto está congelado.
+
+        console.log(Object.isFrozen(obj)); // true
+    
+    *Object.seal(obj)
+        Sella un objeto, evitando agregar o eliminar propiedades, pero permitiendo modificar valores existentes.
+    
+        const obj = { edad: 25 };
+        Object.seal(obj);
+        obj.edad = 30; //Se puede modificar
+        delete obj.edad; //No se puede eliminar
+        console.log(obj.edad); // 30
+
+    *Object.isSealed(obj)
+        Verifica si un objeto está sellado.
+    
+        console.log(Object.isSealed(obj)); // true
+
+###################################################################
+
+Comparación de objetos
+    *Object.is(value1, value2)
+        Compara dos valores de manera estricta (mejor que === en algunos casos).
+
+        console.log(Object.is(NaN, NaN)); // true (diferencia con ===)
+        console.log(Object.is(+0, -0)); // false (diferencia con ===)
+
+Otros métodos útiles
+
+    *Object.defineProperty(obj, prop, descriptor)
+        Define una propiedad con un descriptor personalizado.
+    
+        const obj = {};
+        Object.defineProperty(obj, "nombre", { value: "Juan", writable: false });
+        obj.nombre = "Pedro"; // No cambia porque writable es false
+        console.log(obj.nombre); // "Juan"
+    
+    *Object.defineProperties(obj, props)
+        Define múltiples propiedades con descriptores personalizados.
+    
+        Object.defineProperties(obj, {
+            edad: { value: 30, writable: true },
+            ciudad: { value: "Madrid", writable: false }
+        });
